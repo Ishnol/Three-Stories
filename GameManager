@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class GameManager {
-    private GameState gameState;
+    private GameState gameState; // Game state for tracking player progress
     private ChoiceSystem choiceSystem;
     private CutsceneManager cutsceneManager;
-    private QueenElara player; // Main character
+    private Player player; // Updated to use the Player class
     private Location currentLocation;
     private CommandSystem commandSystem;
     private Map<String, Location> locations;
@@ -17,7 +17,7 @@ public class GameManager {
         gameState = new GameState();
         choiceSystem = new ChoiceSystem();
         cutsceneManager = new CutsceneManager();
-        player = new QueenElara("Elara", 100, 50, 100, 15, 5, "Fire");
+        player = new Player("Elara", 100, 50, 100, 15, 5, "Fire");
         initializeLocations();
         initializeAllies();
         currentLocation = locations.get("Royal Palace");
@@ -44,20 +44,23 @@ public class GameManager {
 
     public void startGame() {
         cutsceneManager.playIntroCutscene();
-        gameState.initialize();
+        gameState.displayGameState(); // Display initial game state
         runGameLoop();
     }
 
     private void runGameLoop() {
         System.out.println("Welcome to the game, " + player.getName() + "!");
         System.out.println("You are currently at " + currentLocation.getName());
+        currentLocation.displayLocationDetails();
         commandSystem.listenForCommand();
     }
 
     public void moveToLocation(String locationName) {
         if (locations.containsKey(locationName)) {
             currentLocation = locations.get(locationName);
+            currentLocation.discover(); // Mark location as discovered
             System.out.println("You have traveled to " + currentLocation.getName() + ". " + currentLocation.getDescription());
+            gameState.modifySanity(5); // Gain sanity for exploring new places
             randomEventSystem.triggerEvent();
         } else {
             System.out.println("That location does not exist.");
@@ -74,8 +77,10 @@ public class GameManager {
             if (ally.getName().equalsIgnoreCase(allyName)) {
                 if (ally instanceof Helio) {
                     ((Helio) ally).performArrowStrike();
+                    gameState.modifyRelationship("Helio", 5); // Improve relationship for using Helio's skill
                 } else if (ally instanceof Mylo) {
                     ((Mylo) ally).revealSecret();
+                    gameState.modifyRelationship("Mylo", 5); // Improve relationship for consulting Mylo
                 }
                 return;
             }
@@ -85,16 +90,31 @@ public class GameManager {
 
     public void confrontVaelcarn() {
         vaelcarn.displayPresence();
-        System.out.println("Vaelcarn speaks: 'Queen Elara, you cannot undo the sands of time. Prepare yourself.'");
+        if (gameState.getSanityLevel() < 30) {
+            System.out.println("Your low sanity weakens your resolve. Vaelcarn's taunts shake you to your core.");
+        } else {
+            System.out.println("Vaelcarn speaks: 'Queen Elara, you cannot undo the sands of time. Prepare yourself.'");
+        }
         combatSystem.startCombat(vaelcarn);
     }
 
-    public void performRitual(String element) {
-        System.out.println("You perform the " + element + " ritual to weaken Vaelcarn's influence.");
-        vaelcarn.corrupt();
+    public void performRitual(String ritualType) {
+        if (gameState.isRitualCompleted(ritualType)) {
+            System.out.println("You have already performed the " + ritualType + " ritual.");
+        } else if (gameState.hasItem("Ritual Component")) {
+            System.out.println("You perform the " + ritualType + " ritual, channeling the energies of " + ritualType + ".");
+            gameState.completeRitual(ritualType);
+            gameState.modifySanity(10); // Gain sanity for successfully performing the ritual
+            vaelcarn.corrupt(); // Strengthens Vaelcarn
+        } else {
+            System.out.println("You lack the necessary components to perform this ritual.");
+        }
     }
 
-    // Additional Getter for Vaelcarn
+    public void displayGameState() {
+        gameState.displayGameState(); // Utility to show the current state of the game
+    }
+
     public Vaelcarn getVaelcarn() {
         return vaelcarn;
     }
