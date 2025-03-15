@@ -2,7 +2,7 @@ import java.util.*;
 
 public class GameState {
     private int sanityLevel; // Tracks Queen Elara's mental state
-    private List<String> inventory; // Stores collected items
+    private List<Item> inventory; // Stores collected items as Item objects
     private Set<String> ritualsCompleted; // Tracks performed rituals
     private Map<String, Integer> relationships; // Tracks relationship levels with allies (e.g., Helio, Mylo)
     private boolean crownEquipped; // Tracks if the Crown of Foresight is equipped
@@ -28,31 +28,51 @@ public class GameState {
         sanityLevel += amount;
         if (sanityLevel > 100) sanityLevel = 100; // Cap sanity at 100
         if (sanityLevel < 0) sanityLevel = 0; // Minimum sanity is 0
-        System.out.println("Sanity Level: " + sanityLevel);
+        System.out.println("Your current sanity level is: " + sanityLevel);
     }
 
     // Inventory Methods
-    public void addItemToInventory(String item) {
+    public void addItemToInventory(Item item) {
         if (!inventory.contains(item)) {
             inventory.add(item);
-            System.out.println(item + " has been added to your inventory.");
+            System.out.println(item.getName() + " has been added to your inventory.");
         } else {
-            System.out.println(item + " is already in your inventory.");
+            System.out.println(item.getName() + " is already in your inventory.");
         }
     }
 
-    public boolean hasItem(String item) {
-        return inventory.contains(item);
+    public boolean hasItem(String itemName) {
+        for (Item item : inventory) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public List<String> getInventory() {
+    public void useItem(String itemName) {
+        for (Item item : inventory) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                System.out.println("You use the " + itemName + ": " + item.getDescription());
+                inventory.remove(item); // Remove item if it's consumable
+                return;
+            }
+        }
+        System.out.println("You do not have " + itemName + " in your inventory.");
+    }
+
+    public List<Item> getInventory() {
         return inventory;
     }
 
     // Ritual Methods
     public void completeRitual(String ritual) {
-        ritualsCompleted.add(ritual);
-        System.out.println("You have completed the " + ritual + " ritual.");
+        if (!ritualsCompleted.contains(ritual)) {
+            ritualsCompleted.add(ritual);
+            System.out.println("You have successfully completed the " + ritual + " ritual.");
+        } else {
+            System.out.println("The " + ritual + " ritual has already been performed.");
+        }
     }
 
     public boolean isRitualCompleted(String ritual) {
@@ -69,8 +89,8 @@ public class GameState {
     }
 
     public void modifyRelationship(String character, int amount) {
-        int newLevel = relationships.getOrDefault(character, 0) + amount;
-        relationships.put(character, Math.max(0, Math.min(newLevel, 100))); // Clamps the value between 0 and 100
+        int newLevel = relationships.getOrDefault(character, 50) + amount;
+        relationships.put(character, Math.max(0, Math.min(newLevel, 100))); // Clamps between 0 and 100
         System.out.println(character + "'s relationship level is now: " + relationships.get(character));
     }
 
@@ -80,13 +100,21 @@ public class GameState {
     }
 
     public void equipCrown() {
-        crownEquipped = true;
-        System.out.println("You have equipped the Crown of Foresight.");
+        if (!crownEquipped) {
+            crownEquipped = true;
+            System.out.println("You have equipped the Crown of Foresight.");
+        } else {
+            System.out.println("The Crown of Foresight is already equipped.");
+        }
     }
 
     public void unequipCrown() {
-        crownEquipped = false;
-        System.out.println("You have removed the Crown of Foresight.");
+        if (crownEquipped) {
+            crownEquipped = false;
+            System.out.println("You have removed the Crown of Foresight.");
+        } else {
+            System.out.println("The Crown of Foresight is not currently equipped.");
+        }
     }
 
     // Vaelcarn Methods
@@ -95,8 +123,25 @@ public class GameState {
     }
 
     public void awakenVaelcarn() {
-        vaelcarnAwakened = true;
-        System.out.println("The ancient entity Vaelcarn has fully awakened!");
+        if (!vaelcarnAwakened) {
+            vaelcarnAwakened = true;
+            System.out.println("The ancient entity Vaelcarn has fully awakened! The sands tremble with its power...");
+        } else {
+            System.out.println("Vaelcarn is already awakened.");
+        }
+    }
+
+    // Utility Method for Displaying State
+    public void displayGameState() {
+        System.out.println("===== Game State =====");
+        System.out.println("Sanity Level: " + sanityLevel);
+        System.out.println("Crown of Foresight Equipped: " + (crownEquipped ? "Yes" : "No"));
+        System.out.println("Vaelcarn Awakened: " + (vaelcarnAwakened ? "Yes" : "No"));
+        System.out.println("Completed Rituals: " + ritualsCompleted);
+        System.out.println("Relationships: " + relationships);
+        System.out.println("Inventory: ");
+        for (Item item : inventory) {
+            System.out.println("- " + item.getName());
+        }
     }
 }
-
