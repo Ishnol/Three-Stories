@@ -1,14 +1,12 @@
-public class Item {
-    private String name; // Item name
-    private String description; // Description of the item
-    private boolean isKeyItem; // Whether it's crucial for story progression
-    private int powerBoost; // Any boost it provides (e.g., mana, attack, etc.)
+public class Location {
+    private String name; // Location name
+    private String description; // Description of the location
+    private boolean isDiscovered; // Tracks if the location has been discovered
 
-    public Item(String name, String description, boolean isKeyItem, int powerBoost) {
+    public Location(String name, String description) {
         this.name = name;
         this.description = description;
-        this.isKeyItem = isKeyItem;
-        this.powerBoost = powerBoost;
+        this.isDiscovered = false; // Locations start as undiscovered
     }
 
     // Getters and Setters
@@ -20,23 +18,22 @@ public class Item {
         return description;
     }
 
-    public boolean isKeyItem() {
-        return isKeyItem;
+    public boolean isDiscovered() {
+        return isDiscovered;
     }
 
-    public int getPowerBoost() {
-        return powerBoost;
+    public void discover() {
+        if (!isDiscovered) {
+            isDiscovered = true;
+            System.out.println("You have discovered: " + name);
+        } else {
+            System.out.println(name + " has already been discovered.");
+        }
     }
 
-    // Display item details
-    public void displayItemInfo() {
-        System.out.println("Name: " + name);
+    public void displayLocationDetails() {
+        System.out.println("Location: " + name);
         System.out.println("Description: " + description);
-        if (isKeyItem) {
-            System.out.println("This is a key item for story progression.");
-        }
-        if (powerBoost != 0) {
-            System.out.println("Power Boost: " + powerBoost);
-        }
+        System.out.println("Status: " + (isDiscovered ? "Discovered" : "Undiscovered"));
     }
 }
