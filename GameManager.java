@@ -28,13 +28,14 @@ public class GameManager {
             "An ancient force corrupted by forbidden magic, resting in the Eternal Dunes.");
     }
 
-    private void initializeLocations() {
-        locations = new HashMap<>();
-        locations.put("Royal Palace", new Location("Royal Palace", "The heart of Aridia, where Queen Elara resides."));
-        locations.put("Oasis of Isolde", new Location("Oasis of Isolde", "A lush oasis, a place of reflection and healing."));
-        locations.put("Eternal Dunes", new Location("Eternal Dunes", "Endless sands, hiding ancient secrets."));
-        locations.put("Ancient Ruins", new Location("Ancient Ruins", "A forgotten place with untold mysteries."));
-    }
+   private void initializeLocations() {
+    locations = new HashMap<>();
+    locations.put("Royal Palace", new Location("Royal Palace", "The heart of Aridia, where Queen Elara resides."));
+    locations.put("Oasis of Isolde", new Location("Oasis of Isolde", "A lush oasis, a place of reflection and healing."));
+    locations.put("Eternal Dunes", new Location("Eternal Dunes", "Endless sands, hiding ancient secrets."));
+    locations.put("Ancient Ruins", new Location("Ancient Ruins", "A forgotten place with untold mysteries."));
+}
+
 
     private void initializeAllies() {
         allies = new ArrayList<>();
@@ -55,18 +56,19 @@ public class GameManager {
         commandSystem.listenForCommand();
     }
 
-    public void moveToLocation(String locationName) {
-        if (locations.containsKey(locationName)) {
-            currentLocation = locations.get(locationName);
-            currentLocation.discover(); // Mark location as discovered
-            System.out.println("You have traveled to " + currentLocation.getName() + ". " + currentLocation.getDescription());
-            gameState.modifySanity(5); // Gain sanity for exploring new places
-            randomEventSystem.triggerEvent();
-        } else {
-            System.out.println("That location does not exist.");
-        }
-        commandSystem.listenForCommand();
+   public void moveToLocation(String locationName) {
+    if (locations.containsKey(locationName)) {
+        currentLocation = locations.get(locationName);
+        currentLocation.discover(); // Mark location as discovered
+        currentLocation.displayLocationDetails(); // Show the player the location details
+        gameState.modifySanity(5); // Add a sanity boost for exploration
+        randomEventSystem.triggerEvent(); // Trigger potential events
+    } else {
+        System.out.println("That location does not exist.");
     }
+    commandSystem.listenForCommand();
+}
+
 
     public void startCombat(Enemy enemy) {
         combatSystem.startCombat(enemy);
