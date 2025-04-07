@@ -146,9 +146,9 @@ public void confrontVaelcarn() {
             break;
         case "attack with allies":
             System.out.println("You call upon your allies for aid.");
-            callAllyAction("Helio");
-            callAllyAction("Mylo");
-            vaelcarn.takeDamage(30); // Allies contribute to the battle
+            int helioDamage = callAllyAction("Helio"); // Helio's attack
+            int myloEffect = callAllyAction("Mylo");  // Mylo's assistance
+            vaelcarn.takeDamage(helioDamage + myloEffect); // Combine ally contributions for total damage
             break;
         case "defend and observe":
             System.out.println("You brace yourself, observing Vaelcarn's movements.");
@@ -157,7 +157,7 @@ public void confrontVaelcarn() {
             break;
         default:
             System.out.println("Invalid action. The sands lash out, punishing your indecision!");
-            player.takeDamage(15); // Player takes damage for an invalid action
+            player.takeDamage(15); // Player takes damage for hesitation
             break;
     }
 
