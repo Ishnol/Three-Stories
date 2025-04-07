@@ -49,6 +49,7 @@ public class Character {
     public void heal(int amount) {
         health += amount;
     }
+   
     public void displayStats() {
         System.out.println("Name: " + name);
         System.out.println("Health: " + health);
@@ -81,7 +82,16 @@ class QueenElara extends Character {
             System.out.println("Not enough mana to use elemental power.");
         }
     }
+
+    @Override
+    public void displayStats() {
+        super.displayStats();
+        System.out.println("Elemental Affinity: " + elementalAffinity);
+        System.out.println("Crown of Foresight: " + (crownOfForesight ? "Equipped" : "Not Equipped"));
+    }
 }
+
+
 
 // Helio Subclass
 class Helio extends Character {
@@ -92,11 +102,21 @@ class Helio extends Character {
         this.archerySkill = archerySkill;
     }
 
-    public void performArrowStrike() {
-        System.out.println(name + " performs a precise arrow strike!");
+    public int performArrowStrike() {
+        int damage = attackPower + archerySkill;
+        System.out.println(name + " performs an arrow strike for " + damage + " damage!");
+        return damage;
+    }
+
+    public int getArcherySkill() {
+        return archerySkill;
+    }
+
+    public void setArcherySkill(int archerySkill) {
+        this.archerySkill = archerySkill;
     }
 }
-
+  
 // Mylo Subclass
 class Mylo extends Character {
     private String knowledgeSpecialty; // E.g., "Maps", "Artifacts"
