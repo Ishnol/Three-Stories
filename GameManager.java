@@ -85,20 +85,28 @@ public class GameManager {
     }
 
     public void callAllyAction(String allyName) {
-        for (Character ally : allies) {
-            if (ally.getName().equalsIgnoreCase(allyName)) {
-                if (ally instanceof Helio) {
-                    ((Helio) ally).performArrowStrike();
-                    gameState.modifyRelationship("Helio", 5); // Improve relationship for using Helio's skill
-                } else if (ally instanceof Mylo) {
-                    ((Mylo) ally).revealSecret();
-                    gameState.modifyRelationship("Mylo", 5); // Improve relationship for consulting Mylo
-                }
-                return;
+    for (Character ally : allies) {
+        if (ally.getName().equalsIgnoreCase(allyName)) {
+            // Check if the ally is on cooldown
+            if (ally.isOnCooldown()) {
+                System.out.println(ally.getName() + " is recovering and can't assist right now.");
+                return; // Exit if the ally is unavailable
             }
+
+            // Allow ally to perform their action
+            if (ally instanceof Helio) {
+                ((Helio) ally).performArrowStrike();
+                gameState.modifyRelationship("Helio", 5); // Improve relationship for using Helio's skill
+            } else if (ally instanceof Mylo) {
+                ((Mylo) ally).revealSecret();
+                gameState.modifyRelationship("Mylo", 5); // Improve relationship for consulting Mylo
+            }
+            return;
         }
-        System.out.println("No ally by that name is available.");
     }
+    System.out.println("No ally by that name is available.");
+}
+
 
 public void confrontVaelcarn() {
     System.out.println("The air grows heavy as you approach the Eternal Dunes.");
