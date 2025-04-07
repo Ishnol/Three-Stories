@@ -58,16 +58,35 @@ class GameManager {
         commandSystem.listenForCommand();
     }
 
-    public void moveToLocation(String locationName) {
-        if (locations.containsKey(locationName)) {
-            currentLocation = locations.get(locationName);
+    
+
+
+   public void moveToLocation(String locationName) {
+    String normalized = locationName.toLowerCase();
+    for (String key : locations.keySet()) {
+        if (key.toLowerCase().equals(normalized)) {
+            Location potentialLocation = locations.get(key);
+
+            // Check if the location is accessible
+            if (!potentialLocation.isAccessible()) {
+                System.out.println("You can't go there yet. Something blocks your way.");
+                commandSystem.listenForCommand();
+                return;
+            }
+
+            // Proceed to move if accessible
+            currentLocation = potentialLocation;
             System.out.println("You have traveled to " + currentLocation.getName() + ". " + currentLocation.getDescription());
             randomEventSystem.triggerEvent();
-        } else {
-            System.out.println("That location does not exist.");
+            commandSystem.listenForCommand();
+            return;
         }
-        commandSystem.listenForCommand();
     }
+    System.out.println("That location does not exist.");
+    commandSystem.listenForCommand();
+}
+
+
 
     public void startCombat(Enemy enemy) {
         combatSystem.startCombat(enemy);
@@ -86,4 +105,5 @@ class GameManager {
         }
         System.out.println("No ally by that name is available.");
     }
+   }
 }
