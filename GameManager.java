@@ -56,18 +56,28 @@ public class GameManager {
         commandSystem.listenForCommand();
     }
 
-   public void moveToLocation(String locationName) {
+ public void moveToLocation(String locationName) {
     if (locations.containsKey(locationName)) {
-        currentLocation = locations.get(locationName);
+        Location potentialLocation = locations.get(locationName);
+
+        // Accessibility check
+        if (!potentialLocation.isAccessible()) {
+            System.out.println("You can't go there yet. Something blocks your way.");
+            return; // Exit early if the location is not accessible
+        }
+
+        // Proceed to move if accessible
+        currentLocation = potentialLocation;
         currentLocation.discover(); // Mark location as discovered
-        currentLocation.displayLocationDetails(); // Show the player the location details
+        currentLocation.displayLocationDetails(); // Show location details
         gameState.modifySanity(5); // Add a sanity boost for exploration
         randomEventSystem.triggerEvent(); // Trigger potential events
     } else {
         System.out.println("That location does not exist.");
     }
-    commandSystem.listenForCommand();
+    commandSystem.listenForCommand(); // Wait for the next player command
 }
+
 
 
     public void startCombat(Enemy enemy) {
