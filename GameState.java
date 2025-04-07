@@ -7,6 +7,8 @@ public class GameState {
     private Map<String, Integer> relationships; // Tracks relationship levels with allies (e.g., Helio, Mylo)
     private boolean crownEquipped; // Tracks if the Crown of Foresight is equipped
     private boolean vaelcarnAwakened; // Tracks if Vaelcarn has been fully awakened
+    private Set<String> storyFlags; // e.g., "foundOasisMap", "spokeToOracle"
+
 
     public GameState() {
         sanityLevel = 100; // Starts at full sanity
@@ -17,6 +19,8 @@ public class GameState {
         relationships.put("Mylo", 50);
         crownEquipped = false;
         vaelcarnAwakened = false;
+        storyFlags = new HashSet<>();
+
     }
 
     // Sanity Level Methods
@@ -33,9 +37,25 @@ public class GameState {
 
     }
 
+    public void setFlag(String flag) {
+    storyFlags.add(flag);
+}
+
+public boolean hasFlag(String flag) {
+    return storyFlags.contains(flag);
+}
+
+    public void setFlag(String flag) {
+    storyFlags.add(flag);
+    System.out.println("Flag set: " + flag);
+}
+
+  
     public void checkSanityEffects() {
     if (sanityLevel <= 25) {
         System.out.println("Whispers haunt your thoughts... Elara's mind begins to fray.");
+    } else if (sanityLevel <= 50) {
+        System.out.println("A sense of unease settles over you, weakening your resolve.");
     }
 }
 
@@ -50,14 +70,9 @@ public class GameState {
         }
     }
 
-    public boolean hasItem(String itemName) {
-        for (Item item : inventory) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                return true;
-            }
-        }
-        return false;
-    }
+  public boolean hasItem(String itemName) {
+    return inventory.stream().anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
+}
 
     public void useItem(String itemName) {
         for (Item item : inventory) {
@@ -99,6 +114,16 @@ public class GameState {
     public int getRelationshipLevel(String character) {
         return relationships.getOrDefault(character, 0);
     }
+
+   public String getRelationshipStatus(String character) {
+    int level = relationships.getOrDefault(character, 0);
+    if (level >= 90) return "Loyal Companion";
+    else if (level >= 70) return "Trusted Ally";
+    else if (level >= 50) return "Neutral";
+    else if (level >= 30) return "Uneasy Ally";
+    else return "Distant";
+}
+
 
     public void modifyRelationship(String character, int amount) {
         int newLevel = relationships.getOrDefault(character, 50) + amount;
@@ -151,6 +176,7 @@ public class GameState {
         System.out.println("Vaelcarn Awakened: " + (vaelcarnAwakened ? "Yes" : "No"));
         System.out.println("Completed Rituals: " + ritualsCompleted);
         System.out.println("Relationships: " + relationships);
+        System.out.println("Story Flags: " + storyFlags);
         System.out.println("Inventory: ");
         for (Item item : inventory) {
             System.out.println("- " + item.getName());
