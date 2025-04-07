@@ -29,8 +29,17 @@ public class GameState {
         if (sanityLevel > 100) sanityLevel = 100; // Cap sanity at 100
         if (sanityLevel < 0) sanityLevel = 0; // Minimum sanity is 0
         System.out.println("Your current sanity level is: " + sanityLevel);
+        checkSanityEffects();
+
     }
 
+    public void checkSanityEffects() {
+    if (sanityLevel <= 25) {
+        System.out.println("Whispers haunt your thoughts... Elara's mind begins to fray.");
+    }
+}
+
+    
     // Inventory Methods
     public void addItemToInventory(Item item) {
         if (!inventory.contains(item)) {
@@ -54,7 +63,10 @@ public class GameState {
         for (Item item : inventory) {
             if (item.getName().equalsIgnoreCase(itemName)) {
                 System.out.println("You use the " + itemName + ": " + item.getDescription());
-                inventory.remove(item); // Remove item if it's consumable
+                if (item.isConsumable()) {
+                    inventory.remove(item); // Remove item if it's consumable
+                    System.out.println(itemName + " has been consumed and removed from your inventory.");
+                }
                 return;
             }
         }
