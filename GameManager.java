@@ -1,192 +1,169 @@
-import java.util.*;
-
 public class GameManager {
-    private GameState gameState; // Tracks overall game state
-    private ChoiceSystem choiceSystem;
-    private CutsceneManager cutsceneManager;
-    private Player player; // Main character (Queen Elara)
-    private Location currentLocation;
+    private GameState gameState;
+    private Player player;
     private CommandSystem commandSystem;
     private Map<String, Location> locations;
+    private Location currentLocation;
+    private List<Character> allies;
+    private Vaelcarn vaelcarn;
     private RandomEventSystem randomEventSystem;
     private CombatSystem combatSystem;
-    private List<Character> allies; // Allies like Helio and Mylo
-    private Vaelcarn vaelcarn; // Ancient entity threatening the kingdom
+    private CutsceneManager cutsceneManager;
+    private ChoiceSystem choiceSystem;
 
     public GameManager() {
         gameState = new GameState();
-        choiceSystem = new ChoiceSystem();
-        cutsceneManager = new CutsceneManager();
         player = new Player("Elara", 100, 50, 100, 15, 5, "Fire");
+        commandSystem = new CommandSystem(player, gameState);
+        cutsceneManager = new CutsceneManager();
+        choiceSystem = new ChoiceSystem();
+        randomEventSystem = new RandomEventSystem(this);
+        combatSystem = new CombatSystem(this, player);
+        vaelcarn = new Vaelcarn("Vaelcarn", 200, 100, 0, 25, 10, "An ancient force corrupted by forbidden magic.");
         initializeLocations();
         initializeAllies();
         currentLocation = locations.get("Royal Palace");
-        commandSystem = new CommandSystem(this);
-        randomEventSystem = new RandomEventSystem(this);
-        combatSystem = new CombatSystem(this, player);
-        vaelcarn = new Vaelcarn("Vaelcarn", 200, 100, 0, 25, 10, 
-            "An ancient force corrupted by forbidden magic, resting in the Eternal Dunes.");
     }
 
-   private void initializeLocations() {
-    locations = new HashMap<>();
-    locations.put("Royal Palace", new Location("Royal Palace", "The heart of Aridia, where Queen Elara resides."));
-    locations.put("Oasis of Isolde", new Location("Oasis of Isolde", "A lush oasis, a place of reflection and healing."));
-    locations.put("Eternal Dunes", new Location("Eternal Dunes", "Endless sands, hiding ancient secrets."));
-    locations.put("Ancient Ruins", new Location("Ancient Ruins", "A forgotten place with untold mysteries."));
-}
-
+    private void initializeLocations() {
+        locations = new HashMap<>();
+        locations.put("Royal Palace", new Location("Royal Palace", "The heart of Aridia."));
+        locations.put("Oasis of Isolde", new Location("Oasis of Isolde", "A lush oasis of healing."));
+        locations.put("Eternal Dunes", new Location("Eternal Dunes", "Endless sands hiding secrets."));
+        locations.put("Ancient Ruins", new Location("Ancient Ruins", "A forgotten place of mystery."));
+    }
 
     private void initializeAllies() {
         allies = new ArrayList<>();
-        allies.add(new Helio("Helio", 80, 30, 100, 10, 3, 7)); // Archery expert
-        allies.add(new Mylo("Mylo", 70, 40, 100, 8, 2, "Artifacts")); // Knowledgeable scout
+        allies.add(new Helio("Helio", 80, 30, 100, 10, 3, 7));
+        allies.add(new Mylo("Mylo", 70, 40, 100, 8, 2, "Artifacts"));
     }
 
     public void startGame() {
         cutsceneManager.playIntroCutscene();
-        gameState.displayGameState(); // Display initial game state
+        gameState.displayGameState();
         runGameLoop();
     }
 
     private void runGameLoop() {
-        System.out.println("Welcome to the game, " + player.getName() + "!");
-        System.out.println("You are currently at " + currentLocation.getName());
+        System.out.println("Welcome, " + player.getName() + "!");
+        System.out.println("Current location: " + currentLocation.getName());
         currentLocation.displayLocationDetails();
         commandSystem.listenForCommand();
     }
 
- public void moveToLocation(String locationName) {
-    if (locations.containsKey(locationName)) {
-        Location potentialLocation = locations.get(locationName);
-
-        // Accessibility check
-        if (!potentialLocation.isAccessible()) {
-            System.out.println("You can't go there yet. Something blocks your way.");
-            return; // Exit early if the location is not accessible
-        }
-
-        // Proceed to move if accessible
-        currentLocation = potentialLocation;
-        currentLocation.discover(); // Mark location as discovered
-        currentLocation.displayLocationDetails(); // Show location details
-        gameState.modifySanity(5); // Add a sanity boost for exploration
-        randomEventSystem.triggerEvent(); // Trigger potential events
-    } else {
-        System.out.println("That location does not exist.");
-    }
-    commandSystem.listenForCommand(); // Wait for the next player command
-}
-
-
-
-    public void startCombat(Enemy enemy) {
-        combatSystem.startCombat(enemy);
-    }
-
-    public void callAllyAction(String allyName) {
-    for (Character ally : allies) {
-        if (ally.getName().equalsIgnoreCase(allyName)) {
-            // Check if the ally is on cooldown
-            if (ally.isOnCooldown()) {
-                System.out.println(ally.getName() + " is recovering and can't assist right now.");
-                return; // Exit if the ally is unavailable
-            }
-
-            // Allow ally to perform their action
-            if (ally instanceof Helio) {
-                ((Helio) ally).performArrowStrike();
-                gameState.modifyRelationship("Helio", 5); // Improve relationship for using Helio's skill
-            } else if (ally instanceof Mylo) {
-                ((Mylo) ally).revealSecret();
-                gameState.modifyRelationship("Mylo", 5); // Improve relationship for consulting Mylo
-            }
+    public void moveToLocation(String locationName) {
+        if (!locations.containsKey(locationName)) {
+            System.out.println("That location does not exist.");
             return;
         }
-    }
-    System.out.println("No ally by that name is available.");
-}
 
+        Location target = locations.get(locationName);
+        if (!target.isAccessible()) {
+            System.out.println("You can't go there yet.");
+            return;
+        }
 
-public void confrontVaelcarn() {
-    System.out.println("The air grows heavy as you approach the Eternal Dunes.");
-    System.out.println("A shadow looms on the horizon. The sands themselves seem to writhe with malice.");
-
-    // Vaelcarn makes its presence known
-    vaelcarn.displayPresence();
-    if (gameState.getSanityLevel() < 30) {
-        System.out.println("Vaelcarn whispers: 'Your mind is weak, Queen Elara. Surrender to the sands.'");
-    } else {
-        System.out.println("Vaelcarn roars: 'You cannot escape your fate, mortal. Face your doom.'");
+        currentLocation = target;
+        currentLocation.discover();
+        currentLocation.displayLocationDetails();
+        gameState.modifySanity(5);
+        randomEventSystem.triggerEvent();
+        commandSystem.listenForCommand();
     }
 
-    // Initial confrontation dialogue
-    System.out.println("What will you do?");
-    System.out.println("- Use Crown of Foresight");
-    System.out.println("- Invoke Elemental Power");
-    System.out.println("- Attack with allies");
-    System.out.println("- Defend and observe");
+    public int callAllyAction(String allyName) {
+        for (Character ally : allies) {
+            if (ally.getName().equalsIgnoreCase(allyName)) {
+                if (ally.isOnCooldown()) {
+                    System.out.println(ally.getName() + " is recovering.");
+                    return 0;
+                }
 
-    Scanner scanner = new Scanner(System.in);
-    String action = scanner.nextLine().toLowerCase();
-
-    switch (action) {
-        case "use crown of foresight":
-            if (gameState.isCrownEquipped()) {
-                System.out.println("You channel the Crown's power, gaining insight into Vaelcarn's weakness.");
-                System.out.println("Vaelcarn falters briefly, the sands stilling for but a moment.");
-                gameState.modifySanity(10); // Gain sanity for using the Crown strategically
-            } else {
-                System.out.println("The Crown of Foresight is not equipped!");
+                if (ally instanceof Helio) {
+                    ((Helio) ally).performArrowStrike();
+                    gameState.getRelationshipManager().updateRelationship("Helio", 5);
+                    return 20;
+                } else if (ally instanceof Mylo) {
+                    ((Mylo) ally).revealSecret();
+                    gameState.getRelationshipManager().updateRelationship("Mylo", 5);
+                    return 10;
+                }
             }
-            break;
-        case "invoke elemental power":
-            System.out.println("You summon the power of " + player.getElementalAffinity() + ", striking at Vaelcarn!");
-            vaelcarn.takeDamage(20); // Deals damage to Vaelcarn
-            break;
-        case "attack with allies":
-            System.out.println("You call upon your allies for aid.");
-            int helioDamage = callAllyAction("Helio"); // Helio's attack
-            int myloEffect = callAllyAction("Mylo");  // Mylo's assistance
-            vaelcarn.takeDamage(helioDamage + myloEffect); // Combine ally contributions for total damage
-            break;
-        case "defend and observe":
-            System.out.println("You brace yourself, observing Vaelcarn's movements.");
-            System.out.println("The sands swirl violently, but you sense an opening...");
-            gameState.modifySanity(5); // Gain a small sanity boost for remaining calm
-            break;
-        default:
-            System.out.println("Invalid action. The sands lash out, punishing your indecision!");
-            player.takeDamage(15); // Player takes damage for hesitation
-            break;
+        }
+        System.out.println("No ally by that name is available.");
+        return 0;
     }
-
-    // Check Vaelcarn's health and escalate the battle
-    if (vaelcarn.getHealth() > 0) {
-        System.out.println("Vaelcarn roars in defiance, growing stronger!");
-        vaelcarn.corrupt(); // Increase corruption to raise stakes
-        combatSystem.startCombat(vaelcarn); // Proceed to full combat
-    } else {
-        System.out.println("Vaelcarn collapses, its shadow fading into the sands.");
-        System.out.println("The Eternal Dunes fall silent, and the Kingdom of Aridia is saved.");
-    }
-}
 
     public void performRitual(String ritualType) {
+        if (gameState.getConditionManager().hasCondition("cursed")) {
+            System.out.println("You are cursed. The ritual fails.");
+            return;
+        }
+
         if (gameState.isRitualCompleted(ritualType)) {
-            System.out.println("You have already performed the " + ritualType + " ritual.");
-        } else if (gameState.hasItem("Ritual Component")) {
-            System.out.println("You perform the " + ritualType + " ritual, channeling the energies of " + ritualType + ".");
+            System.out.println("You’ve already performed the " + ritualType + " ritual.");
+        } else if (gameState.getInventoryManager().hasItem("Ritual Component")) {
+            System.out.println("You perform the " + ritualType + " ritual.");
             gameState.completeRitual(ritualType);
-            gameState.modifySanity(10); // Gain sanity for successfully performing the ritual
-            vaelcarn.corrupt(); // Strengthens Vaelcarn
+            gameState.modifySanity(10);
+            vaelcarn.corrupt();
         } else {
-            System.out.println("You lack the necessary components to perform this ritual.");
+            System.out.println("You lack the components to perform this ritual.");
+        }
+    }
+
+    public void confrontVaelcarn() {
+        System.out.println("The air grows heavy as you approach the Eternal Dunes...");
+        vaelcarn.displayPresence();
+
+        if (gameState.getSanityLevel() < 30) {
+            System.out.println("Vaelcarn whispers: 'Your mind is weak, Queen Elara.'");
+        } else {
+            System.out.println("Vaelcarn roars: 'Face your doom.'");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        String action = scanner.nextLine().toLowerCase();
+
+        switch (action) {
+            case "use crown of foresight":
+                if (gameState.isCrownEquipped()) {
+                    System.out.println("You channel the Crown’s power.");
+                    gameState.modifySanity(10);
+                } else {
+                    System.out.println("The Crown is not equipped.");
+                }
+                break;
+            case "invoke elemental power":
+                System.out.println("You summon " + player.getElementalAffinity() + "!");
+                vaelcarn.takeDamage(20);
+                break;
+            case "attack with allies":
+                int damage = callAllyAction("Helio") + callAllyAction("Mylo");
+                vaelcarn.takeDamage(damage);
+                break;
+            case "defend and observe":
+                System.out.println("You brace yourself and observe...");
+                gameState.modifySanity(5);
+                break;
+            default:
+                System.out.println("Invalid action. The sands lash out!");
+                player.takeDamage(15);
+                break;
+        }
+
+        if (vaelcarn.getHealth() > 0) {
+            System.out.println("Vaelcarn grows stronger!");
+            vaelcarn.corrupt();
+            combatSystem.startCombat(vaelcarn);
+        } else {
+            System.out.println("Vaelcarn collapses. The Kingdom of Aridia is saved.");
         }
     }
 
     public void displayGameState() {
-        gameState.displayGameState(); // Utility to show the current state of the game
+        gameState.displayGameState();
     }
 
     public Vaelcarn getVaelcarn() {
