@@ -15,6 +15,9 @@ public class InventoryManager {
             System.out.println(item.getName() + " is already in your inventory.");
         }
     }
+public void removeItem(String itemName) {
+    inventory.removeIf(item -> item.getName().equalsIgnoreCase(itemName));
+}
 
     public boolean hasItem(String itemName) {
         for (Item item : inventory) {
@@ -32,7 +35,8 @@ public class InventoryManager {
                 case "crown of foresight":
                     player.modifySanity(-10);
                     System.out.println("Visions flood your mind. Sanity decreases.");
-                    break;
+                     removeItem(itemName); // if it's consumable
+                     break;
                 case "veil of isolde":
                     System.out.println("A calm veil surrounds you. Mental influence blocked.");
                     break;
