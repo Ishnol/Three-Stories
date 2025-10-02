@@ -1,16 +1,16 @@
 public class Vaelcarn extends Character {
-    private String originStory; // The backstory of Vaelcarn
-    private int corruptionLevel; // Tracks the entity's growing power
-    private boolean isAwakened; // Indicates if Vaelcarn has fully awakened
+    private String originStory;       // Lore of Vaelcarn's creation
+    private int corruptionLevel;      // Tracks growing power
+    private boolean isAwakened;       // Indicates full awakening
 
     public Vaelcarn(String name, int health, int mana, int sanity, int attackPower, int defense, String originStory) {
         super(name, health, mana, sanity, attackPower, defense);
         this.originStory = originStory;
-        this.corruptionLevel = 0; // Starts as dormant
-        this.isAwakened = false; // Vaelcarn is not awakened at the start
+        this.corruptionLevel = 0;
+        this.isAwakened = false;
     }
 
-    // Getters and Setters
+    // === Getters ===
     public String getOriginStory() {
         return originStory;
     }
@@ -23,10 +23,18 @@ public class Vaelcarn extends Character {
         return isAwakened;
     }
 
-    // Vaelcarn's actions
+    public boolean isFullyCorrupted() {
+        return corruptionLevel >= 100;
+    }
+
+    // === Boss Behavior ===
     public void corrupt() {
         corruptionLevel += 10;
+        attackPower += 5;
+        sanity -= 5;
         System.out.println(name + " grows stronger. Corruption level: " + corruptionLevel);
+        System.out.println("Attack Power increased to " + attackPower + ". Sanity now: " + sanity);
+
         if (corruptionLevel >= 100 && !isAwakened) {
             awaken();
         }
@@ -37,10 +45,10 @@ public class Vaelcarn extends Character {
         System.out.println(name + " has fully awakened! The sands tremble with its power.");
     }
 
-    @Override
-    public int attack() {
-        System.out.println(name + " unleashes a devastating sandstorm attack!");
-        return attackPower + (int)(Math.random() * 20); // Deals randomized high damage
+    public void unleashDesertWrath(Character target) {
+        int damage = attackPower + corruptionLevel / 2;
+        System.out.println(name + " unleashes Desert Wrath for " + damage + " damage!");
+        target.takeDamage(damage);
     }
 
     public void tauntPlayer(int sanityLevel) {
@@ -51,7 +59,24 @@ public class Vaelcarn extends Character {
         }
     }
 
+    public void revealOrigin() {
+        System.out.println("Vaelcarn's origin: " + originStory);
+    }
+
     public void displayPresence() {
         System.out.println("A dark and oppressive force fills the air. Vaelcarn is near...");
+    }
+
+    @Override
+    public int attack() {
+        System.out.println(name + " unleashes a devastating sandstorm attack!");
+        return attackPower + (int)(Math.random() * 20);
+    }
+
+    @Override
+    public void displayStats() {
+        super.displayStats();
+        System.out.println("Corruption Level: " + corruptionLevel);
+        System.out.println("Awakened: " + (isAwakened ? "Yes" : "No"));
     }
 }
