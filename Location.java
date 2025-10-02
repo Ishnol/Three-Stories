@@ -1,14 +1,19 @@
+import java.util.List;
+
 public class Location {
     private String name;
     private String description;
     private boolean isDiscovered;
     private boolean accessible;
 
-    // New fields
-    private String elementalAffinity; // e.g., "Fire", "Water", "Air", "Earth"
-    private int dangerLevel; // Scale from 0 (safe) to 10 (deadly)
-    private boolean ritualCompatible; // Can rituals be performed here?
-    private String ambientEffect; // e.g., "Sanity Drain", "Vision Boost", "Elemental Surge"
+    // Environmental traits
+    private String elementalAffinity;     // e.g., "Fire", "Water", "Air", "Earth"
+    private int dangerLevel;              // Scale from 0 (safe) to 10 (deadly)
+    private boolean ritualCompatible;     // Can rituals be performed here?
+    private String ambientEffect;         // e.g., "Sanity Drain", "Vision Boost", "Elemental Surge"
+
+    // Monster encounters
+    private List<Monster> localMonsters;
 
     public Location(String name, String description, String elementalAffinity, int dangerLevel,
                     boolean ritualCompatible, String ambientEffect) {
@@ -22,7 +27,7 @@ public class Location {
         this.accessible = true;
     }
 
-    // Getters
+    // === Getters ===
     public String getName() { return name; }
     public String getDescription() { return description; }
     public boolean isDiscovered() { return isDiscovered; }
@@ -31,12 +36,14 @@ public class Location {
     public int getDangerLevel() { return dangerLevel; }
     public boolean isRitualCompatible() { return ritualCompatible; }
     public String getAmbientEffect() { return ambientEffect; }
+    public List<Monster> getMonsters() { return localMonsters; }
 
-    // Setters
+    // === Setters ===
     public void setAccessible(boolean accessible) { this.accessible = accessible; }
     public void setDangerLevel(int dangerLevel) { this.dangerLevel = dangerLevel; }
+    public void setMonsters(List<Monster> monsters) { this.localMonsters = monsters; }
 
-    // Discover method
+    // === Discovery Logic ===
     public void discover() {
         if (!isDiscovered) {
             isDiscovered = true;
@@ -46,7 +53,7 @@ public class Location {
         }
     }
 
-    // Display method
+    // === Display Location Details ===
     public void displayLocationDetails() {
         System.out.println("Location: " + name);
         System.out.println("Description: " + description);
@@ -56,5 +63,12 @@ public class Location {
         System.out.println("Ambient Effect: " + ambientEffect);
         System.out.println("Status: " + (isDiscovered ? "Discovered" : "Undiscovered"));
         System.out.println("Accessibility: " + (accessible ? "Accessible" : "Blocked"));
+
+        if (localMonsters != null && !localMonsters.isEmpty()) {
+            System.out.println("Monsters in this area:");
+            for (Monster m : localMonsters) {
+                System.out.println("- " + m.getName() + ": " + m.getDescription());
+            }
+        }
     }
 }
