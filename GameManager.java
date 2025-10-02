@@ -52,11 +52,38 @@ public class GameManager {
         commandSystem.listenForCommand();
     }
 
-    public void moveToLocation(String locationName) {
-        if (!locations.containsKey(locationName)) {
-            System.out.println("That location does not exist.");
-            return;
+  public void moveToLocation(String locationName) {
+    if (!locations.containsKey(locationName)) {
+        System.out.println("That location does not exist.");
+        return;
+    }
+
+    Location target = locations.get(locationName);
+    if (!target.isAccessible()) {
+        System.out.println("You can't go there yet.");
+        return;
+    }
+
+    currentLocation = target;
+    currentLocation.discover();
+    currentLocation.displayLocationDetails();
+    gameState.modifySanity(5);
+
+    // Trigger monster encounter
+    List<Monster> monsters = currentLocation.getMonsters();
+    if (monsters != null && !monsters.isEmpty()) {
+        Monster encounter = monsters.get(new Random().nextInt(monsters.size()));
+        encounter.encounter();
+        if (encounter.isHostile()) {
+            combatSystem.startCombat(encounter);
         }
+    }
+
+    // Continue game loop
+    randomEventSystem.triggerEvent();
+    commandSystem.listenForCommand();
+}
+
 
         Location target = locations.get(locationName);
         if (!target.isAccessible()) {
