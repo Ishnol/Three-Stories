@@ -1,87 +1,399 @@
-Story Concepts: 
+Ersell Kizzie 
+
+Text-based Java storytelling 
 
  
 
-Psychutal’s Labyrinth:  
-
-Settings: The Forest of Vekalu. 
-
-Characters: Lilith y Destuca (Main antagonists), Mylo Yasujiro (protagonists), Helio Umetris (Ally) 
-
-Plot: The player assumes control of Mylo Yasujiro, a man sent on a quest to free his sister Aster Redwood from the Psychutals' grasp. Mylo's mind is manipulated by Lilith and Destuca in the forest, which is a mental maze. By use of elemental magic and visions, Helio Umetris provides counsel. After navigating the jungle and overcoming psychological obstacles, the player must face Lilith and Destuca and decide whether to defeat them or discover a method to spare their dual consciousness from their terrible destiny. 
-
-Location: Forest of Vekalu, Aster’s Prison (a twisted mental landscape), Helio’s Sanctury (safee zone within the forest). 
-
-Digital War:  
-
-Setting: City of Technoa 
-
-Characters: Vunar Lexos (mission handler), Isheal (ally or antagonist), and Nyx Solara (protagonist). 
-
-Plot: The player, taking the role of Nyx Solara, is assigned the mission of breaking into a highly guarded Technoa server that is under Isheal's command. The game switches between digital combat in cyberspace and real-world covert operations in cities. Isheal may have her own goals and be an enemy or a possible friend. The tension between preserving Nyx's humanity and meeting the ever-increasing requirements of her cybernetic augmentation might be explored in the narrative. 
-
-Locations: virtual reality landscapes, the corporate tower hosting the server, and the slums of Technoa. 
-
- 
-
-Desert Queens and Secrets: 
-
-Setting: Kingdom of Aridia 
-
-Characters: Mylo Yasujiro, a visiting dignitary or scout, Helio Umetris, the adviser, and Queen Elara Drakonis, the main character. 
-
-Plot: An ancient entity that has awoken in the Eternal Dunes poses a danger to Elara Drakonis's realm. As Elara, the player must utilize her elemental mastery, mental power, and insight to discover the mysteries of the desert and inspire her people. With the help of his elemental magic and archery, Helio Umetris assists her, while Mylo Yasujiro gives her knowledge from the outside world. The destiny of Aridia and its inhabitants will depend on decisions made. 
-
-Locations: the Royal Palace, the Oasis of Isolde, the Eternal Dunes, and undiscovered desert ruins. 
-
- 
-
-Putting in Place Interactions, Items, and Entities: 
-
- 
-
-Entities:A 
-
- Players engage with Lilith y Destuca as part of the woodland story. able to transition between aggressive and sympathetic positions. 
-
-Nyx Solara is a cyber narrative player character. 
-
-A protagonist in the story of the desert is Queen Elara Drakonis. 
-
- 
-
-Items:  
-
-Psychutal Relic: An item that aids Mylo in eluding mental manipulation. 
-
-Cyber Dagger: In the Technoa narrative, a hacking instrument. 
-
-An object called the Crown of Foresight improves Elara's ability to see into the future. 
- 
-
-Locations:  
-
-In Aster's Prison, Mylo is forced to face his inner demons. 
-
-The underbelly of Technoa is a place where tech-savvy criminals lurk. 
-
-The key to putting an end to the ancient power is hidden in the ancient ruins of Aridia. 
- 
-
-Complex Interactions:  
-
-Mind Battles: Throughout the woodland story, the player must fight back against Lilith and Destuca's influence in these mental battles. 
-
-Cyberwarfare: Switch between physical infiltration and digital warfare in Technoa. 
-
-Rites of the Elements: In Aridia, rites that have an impact on the desert and its people are carried out. 
  
 
  
 
  
+
+Storyline overview 
+
+The story takes place in the Kingdom of Aridia, a vast desert kingdom under attack by an ancient entity that has awoken in the Eternal Dunes. Players assume the role of Queen Elara Drakonis, the ruler of Aridia, who must use her elemental mastery, mental power, and insight to uncover the mysteries of the desert and rally her people against the threat. 
+
+Helio Umetris, the kingdom's trusted adviser with elemental magic and archery skills, joins her, as does Mylo Yasujiro, a visiting dignitary or scout who brings valuable knowledge from the outside world. Throughout the story, the player's decisions will shape the future of Aridia, as the kingdom's fate is determined by how they deal with the challenges that lie ahead. 
+
+The Royal Palace, Oasis of Isolde, Eternal Dunes, and undiscovered desert ruins are among the must-see locations. The player will participate in Rites of the Elements, rituals that have an immediate impact on the desert and its inhabitants. The key item, the Crown of Foresight, improves Elara's ability to see into the future, guiding her decisions. 
+
  
 
  
+
+Detailed steps to get to endings (may need updates) 
+
+The Kingdom Saved - Elara successfully solves the mystery of the ancient entity and uses her elemental powers to eliminate the threat. The kingdom thrives, and her people honor her as a hero. The Rites of the Elements are successfully performed, ensuring prosperity for future generations. 
+
  
+
+Commands Needed 
+
+investigate ruins 
+
+summon elemental 
+
+perform ritual 
+
+confront ancient entity 
+
+use Crown of Foresight 
+
+defeat entity 
+
+inspire people 
+
+ 
+
+Destruction and Rebirth -  Despite Elara's best efforts, the ancient entity's power is too overwhelming. The kingdom suffers significant losses, but in the aftermath, Elara uses the knowledge she gained on her journey to rebuild Aridia, focusing on learning from the past to avoid future threats. A new era begins, but the scars of war remain. 
+
+ 
+
+Commands needed: 
+
+search desert 
+
+discover hidden knowledge 
+
+perform ritual 
+
+awaken ancient entity 
+
+seal entity 
+
+rebuild kingdom 
+
+ 
+
+The Fall of Aridia - Elara fails to realize the full potential of her elemental powers, and the ancient entity takes over the kingdom. The desert sands swallow the Royal Palace, leaving the land in ruins. The people are scattered, and the world has forgotten Aridia. The player's choices result in a tragic ending. 
+
+ 
+
+Commands needed 
+
+fail ritual 
+
+confront entity without power 
+
+witness destruction 
+
+abandon kingdom 
+
+escape desert 
+
+ 
+
+ 
+
+   Locations (need more than 4) 
+
+Royal Palace - The center of the kingdom, where political decisions are made. It serves as Elara's headquarters for planning and gathering information. 
+
+Oasis of Isolde - Named after Queen Elara’s mother, this magnificent oasis is a sanctuary of life amidst the arid desert. Palm trees sway gently around crystal-clear waters, and exotic flora and fauna thrive in this verdant haven. It is said that the waters of Isolde have healing properties, blessed by the kingdom’s ancient deities.   
+
+Eternal Dunes - The vast deserts of Aridia are both beautiful and deadly. These endless dunes shift with the winds, creating an ever-changing landscape that can easily disorient even the most seasoned traveler. Hidden within the sands are ancient ruins and lost treasures, remnants of civilizations long past.   
+
+Undiscovered desert Ruins - Hidden throughout the desert, these ruins contain artifacts and knowledge that may reveal secrets about the ancient entity. 
+
+The Shattered Spire - A half-buried tower in the dunes, crackling with forgotten storm magic. The Ancient Entity is said to have first stirred here. 
+
+Caverns of Ashra - A maze of underground tunnels guarded by monsters that can withstand high temperatures. 
+
+Moon Salt Flats - A reflecting desert plain where elemental forces are amplified during full moon ceremonies. 
+
+The Verdant Rift - A hidden canyon where desert plants bloom unnaturally fast, nourished by an old elemental imbalance. 
+
+Obsidian Gate - A massive locked door hidden beneath black stone, connected directly to the Entity's origin. 
+
+ 
+
+ 
+
+Items (need as many to make story and game fluent) 
+
+Psychutal Relic: An Item that aids Mylo in eluding mental manipulation 
+
+Map  
+
+Appearance: A weathered parchment etched with changing runes that occasionally rearrange themselves to expose undiscovered passageways. 
+
+Effect: As the player explores ruins or performs rituals, it tracks known places and unlocks secret passageways. 
+
+Gameplay Use: Reduces the likelihood of getting lost in exploration commands (search desert, explore dunes), and occasionally identifies danger zones. 
+
+Crown of Foresight -  
+
+Appearance: A gold circlet with a moving opal that appears to contain shards of the desert sky. 
+
+Effect: Allows Elara to see threads of possible futures. The visions are intense yet imperfect, frequently depicting symbols, emotions, or fragments rather than complete clarity. 
+
+Gameplay Use: Can be enabled before making critical decisions to receive hints or warnings. Overuse depletes Elara's sanity stat. 
+
+Ritual Components -  
+
+Appearance: A collection of sacred powders, gemstones, and relic fragments kept in bone-carved vessels. Each is linked to an element. 
+
+Effect: Required for the Elements' Rites. Without them, rituals can backfire or fail completely. 
+
+Gameplay Use: Consumable item. Using them at the wrong time or location might waste resources and result in cursed effects. 
+
+Desertglass Shard -  
+
+Appearance: A shard of translucent crystal discovered deep within the dunes, gleaming with trapped starlight. When held, subtle whispers resonate through the mind. 
+
+ Legend: These are said to be remnants of an antique mirror that once reflected the desert's spirit. The glass shattered when the Entity was originally sealed. 
+
+ Effect: Improves foresight and perception but drains sanity with time. 
+
+Gameplay Use: Can strengthen the Crown of Foresight's visions but may cause mental instability. 
+
+Scarab Compass - 
+
+Appearance: A bronze scarab pendant with wings that twitch and change like clockwork, always facing the nearest source of power. 
+
+Legend: Designed by priests of the Oasis of Isolde, the scarab was regarded as a guide through storms and illusions. It fails to discern between friend and adversary. 
+
+Effect: Directs the bearer to the strongest magical presence in the region. 
+
+Gameplay Application: Aids in the discovery of hidden ruins or opponents, but may inadvertently lead to disaster. 
+
+Sunford Dagger -  
+
+Appearance: A slender, curving sword made from tempered desert iron that glows faintly in stored sunlight. Its edge flames brightly in conflict.  
+
+Legend: Once wielded by the warrior-king Ragnar Drakonis, who was said to channel the desert sun itself through the blade during battle. 
+
+Effect: Channels sun fire, which is destructive against shadow and sand creatures but less effective against water or earth beings. 
+
+Gameplay Use: Elara or Helio can use this fighting relic to gain an advantage over corrupted foes. 
+
+Echo Vial - 
+
+Appearance: A crystal bottle covered in silver, which sparkles slightly when near voices. Once uncorked, it emits the sound it has stored. 
+
+Legend: Originally used by desert oracles to keep holy mantras. Some claim that they can record the dying person's final remarks. 
+
+Effect: Voices can be stored and replayed to deceive, inspire, or unlock sound-based wards. 
+
+Gameplay Use: Diplomacy, unlocking boundaries, and fooling foes are all possible gameplay applications. 
+
+Veil of Isolde -  
+
+Appearance: A translucent silky veil that changes hue like desert sunrise. When worn, it feels chilly against the skin, as if offering protection. 
+
+Legend: It belonged to Queen Isolde Drakonis. It was sanctified by the desert deities to protect her from evil whispers during her rule. 
+
+Effect: Prevents mental influence and fear-based magic. 
+
+Gameplay Use: Enhances Elara's mind control skills and protects her from corruption by the Ancient Entity. 
+
+Complex Commands (based off Character Bio) 
+
+Exploration Commands: 
+
+explore dunes 
+
+descend caverns 
+
+unearth relic 
+
+navigate with map 
+
+Elemental / Ritual Commands: 
+
+channel fire/light 
+
+invoke foresight 
+
+perform rite of water 
+
+stabilize rift 
+
+Relationship / Ally Commands: 
+
+seek Helio’s counsel 
+
+test Mylo’s instincts 
+
+share vision 
+
+command troops 
+
+Conflict Commands: 
+
+confront with elemental force 
+
+use relic 
+
+seal with ritual 
+
+choose sacrifice 
+
+ 
+
+ 
+
+Entities (same as items) 
+
+Mylo Yasujiro - A dignitary or scout from another land who gives Elara valuable information about the world beyond Aridia. 
+
+2. Helio Umetris  - Elara's trusted adviser, who specializes in elemental magic and archery, assists her in both physical and magical combat. 
+
+3. Queen Elara Drakonis (Main Character) - A ruler with elemental magic mastery is tasked with saving her kingdom. 
+
+4. Ancient Entity: A mysterious force that has awakened in the Eternal Dunes, endangering the kingdom. 
+
+ 
+
+ 
+
+Player Object (1) 
+
+Player Object: Elara 
+
+Data Stored: Health, elemental powers (fire, earth, water, air), sanity, inventory (Crown of Foresight, ritual components, map), relationship status with allies (Helio, Mylo), and progress towards discovering the desert's secrets. 
+
+ 
+
+ 
+
+ 
+
+Characters Bio 
+
+ 
+
+Queen Elara Drakonis (30) - Human 
+
+Features 
+
+Skin Color: Fair with a slight golden undertone 
+
+Hair Style/Type/Color: Long, straight, and platinum blonde, cascading down her back 
+
+Eye Color: Piercing ice blue 
+
+Height: 5’9 
+
+ 
+
+Origin  
+
+The Kingdom of Aridia, a land of deserts and ancient secrets 
+
+Parents 
+
+Mother: Queen Isolde Drakonis, known for her wisdom and just rule 
+
+Father: King Ragnar Drakonis, a fierce warrior king who united the desert tribes 
+
+Feats/Ablities 
+
+Foresight: Visions of the future and glimpses into possible outcomes of events. 
+
+Elemental Control: Mastery over fire and light, able to summon flames and blinding radiance. 
+
+Mind Influence: Ability to instill courage or fear within her troops and enemies. 
+
+Life Force Manipulation: Can heal or drain life energy, using it to strengthen herself or weaken foes. 
+
+Helio Umetris (23) – Elf + Fairy 
+
+Features 
+
+Eye Color: Brown 
+
+Height: 5’11 
+
+Origin:  
+
+Misty De la Grove 
+
+Family 
+
+Batsheva Xalu - Wife 
+
+Zeke Locktin – Brother 
+
+Hethica – Mother (deceased) 
+
+Hawthorne Umetris – Father 
+
+Feats/Abilities 
+
+Enhanced Visual Perception: Superior eyesight, allowing him to see details from great distances or in low light conditions.   
+
+Bow Skills: Expert archer with exceptional precision and skill.   
+
+Elemental Magic: Ability to manipulate natural elements such earth, air, and a little bit of water due to his wife. 
+
+Flight: Can fly using his fairy wings, providing both mobility and a tactical advantage. 
+
+Invisibility: Ability to become unseen at will, useful for stealth and evasion. 
+
+Enhanced Senses: Heightened sensory abilities, including sight, hearing, and smell.   
+
+Stealth and Agility: Exceptional at moving quietly and swiftly, making him hard to detect. 
+
+ 
+
+Mylo Yasujiro (29) – Ethiopian Wolf  
+
+Features 
+
+Eye color: Burgundy & Forest Green 
+
+Hair: White dreadlocks pulled into a high ponytail, cascading like a mane. 
+
+Accessories: Each ear is pierced with small, matte black rings. One ring dangle slightly, etched with a symbol from Lavaossa’s ancient script 
+
+Height: 6’0 
+
+Origin 
+
+Kingdom of Cloudy Lavaossa 
+
+Family 
+
+Kifo Yasujiro – Mother 
+
+Aster Redwood – Younger sister 
+
+Marianna Reeves – Sister's Girlfriend 
+
+Feats/Abilities 
+
+Resilience and Adaptability in harsh environments 
+
+Hunting Prowess honed through experience 
+
+Superb Senses that heighten his awareness 
+
+Communication skills vital for pack coordination 
+
+Danger Sense that alerts him to unseen threats 
+
+His signature ability, Hollowed Fang, sets him apart: by dislocating his jaw, Mylo can unleash a devastating bite with force far beyond what his size suggests—a technique both feared and revered. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Other notes:  
+
+Maps: Include a map of the Kingdom of Aridia, highlighting key locations such as the Royal Palace, Oasis of Isolde, and Eternal Dunes. Consider marking out pathways and areas within the desert ruins where hidden knowledge and artifacts may be discovered. 
+
+ 
+
+Item Connections: A diagram demonstrating how the items interact (for example, the Crown of Foresight can be used to gather information prior to performing rituals or confronting the entity). 
+
+ 
+
+Character Connections: Describe the relationships between Elara, Helio, Mylo, and other key characters, emphasizing how their actions and trust affect Elara's journey and choices. 
+
  
