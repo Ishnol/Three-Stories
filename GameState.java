@@ -1,101 +1,54 @@
 import java.util.*;
 
 public class GameState {
-    private int sanityLevel; // Tracks Queen Elara's mental state
-    private List<Item> inventory; // Stores collected items as Item objects
-    private Set<String> ritualsCompleted; // Tracks performed rituals
-    private Map<String, Integer> relationships; // Tracks relationship levels with allies (e.g., Helio, Mylo)
-    private boolean crownEquipped; // Tracks if the Crown of Foresight is equipped
-    private boolean vaelcarnAwakened; // Tracks if Vaelcarn has been fully awakened
-    private Set<String> storyFlags; // e.g., "foundOasisMap", "spokeToOracle"
+    private int sanityLevel;
+    private InventoryManager inventoryManager;
+    private RelationshipManager relationshipManager;
+    private ConditionManager conditionManager;
 
+    private Set<String> ritualsCompleted;
+    private boolean crownEquipped;
+    private boolean vaelcarnAwakened;
+    private Set<String> storyFlags;
 
     public GameState() {
-        sanityLevel = 100; // Starts at full sanity
-        inventory = new ArrayList<>();
+        sanityLevel = 100;
+        inventoryManager = new InventoryManager();
+        relationshipManager = new RelationshipManager();
+        conditionManager = new ConditionManager();
+
         ritualsCompleted = new HashSet<>();
-        relationships = new HashMap<>();
-        relationships.put("Helio", 50); // Neutral starting relationship
-        relationships.put("Mylo", 50);
         crownEquipped = false;
         vaelcarnAwakened = false;
         storyFlags = new HashSet<>();
 
+        relationshipManager.updateRelationship("Helio", 0); // Neutral baseline
+        relationshipManager.updateRelationship("Mylo", 0);
     }
 
-    // Sanity Level Methods
+    // === Sanity Methods ===
     public int getSanityLevel() {
         return sanityLevel;
     }
 
     public void modifySanity(int amount) {
         sanityLevel += amount;
-        if (sanityLevel > 100) sanityLevel = 100; // Cap sanity at 100
-        if (sanityLevel < 0) sanityLevel = 0; // Minimum sanity is 0
+        sanityLevel = Math.max(0, Math.min(100, sanityLevel));
         System.out.println("Your current sanity level is: " + sanityLevel);
         checkSanityEffects();
-
     }
 
-    public void setFlag(String flag) {
-    storyFlags.add(flag);
-}
-
-public boolean hasFlag(String flag) {
-    return storyFlags.contains(flag);
-}
-
-    public void setFlag(String flag) {
-    storyFlags.add(flag);
-    System.out.println("Flag set: " + flag);
-}
-
-  
     public void checkSanityEffects() {
-    if (sanityLevel <= 25) {
-        System.out.println("Whispers haunt your thoughts... Elara's mind begins to fray.");
-    } else if (sanityLevel <= 50) {
-        System.out.println("A sense of unease settles over you, weakening your resolve.");
-    }
-}
-
-    
-    // Inventory Methods
-    public void addItemToInventory(Item item) {
-        if (!inventory.contains(item)) {
-            inventory.add(item);
-            System.out.println(item.getName() + " has been added to your inventory.");
-        } else {
-            System.out.println(item.getName() + " is already in your inventory.");
+        if (sanityLevel <= 25) {
+            System.out.println("Whispers haunt your thoughts... Elara's mind begins to fray.");
+        } else if (sanityLevel <= 50) {
+            System.out.println("A sense of unease settles over you, weakening your resolve.");
         }
     }
 
-  public boolean hasItem(String itemName) {
-    return inventory.stream().anyMatch(item -> item.getName().equalsIgnoreCase(itemName));
-}
-
-    public void useItem(String itemName) {
-        for (Item item : inventory) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                System.out.println("You use the " + itemName + ": " + item.getDescription());
-                if (item.isConsumable()) {
-                    inventory.remove(item); // Remove item if it's consumable
-                    System.out.println(itemName + " has been consumed and removed from your inventory.");
-                }
-                return;
-            }
-        }
-        System.out.println("You do not have " + itemName + " in your inventory.");
-    }
-
-    public List<Item> getInventory() {
-        return inventory;
-    }
-
-    // Ritual Methods
+    // === Ritual Methods ===
     public void completeRitual(String ritual) {
-        if (!ritualsCompleted.contains(ritual)) {
-            ritualsCompleted.add(ritual);
+        if (ritualsCompleted.add(ritual)) {
             System.out.println("You have successfully completed the " + ritual + " ritual.");
         } else {
             System.out.println("The " + ritual + " ritual has already been performed.");
@@ -110,28 +63,17 @@ public boolean hasFlag(String flag) {
         return ritualsCompleted;
     }
 
-    // Relationship Methods
-    public int getRelationshipLevel(String character) {
-        return relationships.getOrDefault(character, 0);
+    // === Story Flags ===
+    public void setFlag(String flag) {
+        storyFlags.add(flag);
+        System.out.println("Flag set: " + flag);
     }
 
-   public String getRelationshipStatus(String character) {
-    int level = relationships.getOrDefault(character, 0);
-    if (level >= 90) return "Loyal Companion";
-    else if (level >= 70) return "Trusted Ally";
-    else if (level >= 50) return "Neutral";
-    else if (level >= 30) return "Uneasy Ally";
-    else return "Distant";
-}
-
-
-    public void modifyRelationship(String character, int amount) {
-        int newLevel = relationships.getOrDefault(character, 50) + amount;
-        relationships.put(character, Math.max(0, Math.min(newLevel, 100))); // Clamps between 0 and 100
-        System.out.println(character + "'s relationship level is now: " + relationships.get(character));
+    public boolean hasFlag(String flag) {
+        return storyFlags.contains(flag);
     }
 
-    // Crown of Foresight Methods
+    // === Crown Methods ===
     public boolean isCrownEquipped() {
         return crownEquipped;
     }
@@ -154,7 +96,7 @@ public boolean hasFlag(String flag) {
         }
     }
 
-    // Vaelcarn Methods
+    // === Vaelcarn Methods ===
     public boolean isVaelcarnAwakened() {
         return vaelcarnAwakened;
     }
@@ -168,18 +110,29 @@ public boolean hasFlag(String flag) {
         }
     }
 
-    // Utility Method for Displaying State
+    // === Accessors for Managers ===
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
+    }
+
+    public RelationshipManager getRelationshipManager() {
+        return relationshipManager;
+    }
+
+    public ConditionManager getConditionManager() {
+        return conditionManager;
+    }
+
+    // === Display Method ===
     public void displayGameState() {
         System.out.println("===== Game State =====");
         System.out.println("Sanity Level: " + sanityLevel);
         System.out.println("Crown of Foresight Equipped: " + (crownEquipped ? "Yes" : "No"));
         System.out.println("Vaelcarn Awakened: " + (vaelcarnAwakened ? "Yes" : "No"));
         System.out.println("Completed Rituals: " + ritualsCompleted);
-        System.out.println("Relationships: " + relationships);
         System.out.println("Story Flags: " + storyFlags);
-        System.out.println("Inventory: ");
-        for (Item item : inventory) {
-            System.out.println("- " + item.getName());
-        }
+        inventoryManager.displayInventory();
+        relationshipManager.displayRelationships();
+        conditionManager.displayConditions();
     }
 }
