@@ -85,20 +85,6 @@ public class GameManager {
 }
 
 
-        Location target = locations.get(locationName);
-        if (!target.isAccessible()) {
-            System.out.println("You can't go there yet.");
-            return;
-        }
-
-        currentLocation = target;
-        currentLocation.discover();
-        currentLocation.displayLocationDetails();
-        gameState.modifySanity(5);
-        randomEventSystem.triggerEvent();
-        commandSystem.listenForCommand();
-    }
-
     public int callAllyAction(String allyName) {
         for (Character ally : allies) {
             if (ally.getName().equalsIgnoreCase(allyName)) {
@@ -129,7 +115,7 @@ public class GameManager {
         }
 
         if (gameState.isRitualCompleted(ritualType)) {
-            System.out.println("You’ve already performed the " + ritualType + " ritual.");
+            System.out.println("Youâ€™ve already performed the " + ritualType + " ritual.");
         } else if (gameState.getInventoryManager().hasItem("Ritual Component")) {
             System.out.println("You perform the " + ritualType + " ritual.");
             gameState.completeRitual(ritualType);
@@ -156,7 +142,7 @@ public class GameManager {
         switch (action) {
             case "use crown of foresight":
                 if (gameState.isCrownEquipped()) {
-                    System.out.println("You channel the Crown’s power.");
+                    System.out.println("You channel the Crownâ€™s power.");
                     gameState.modifySanity(10);
                 } else {
                     System.out.println("The Crown is not equipped.");
