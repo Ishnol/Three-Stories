@@ -80,38 +80,3 @@ public class Item {
     }
 }
 
-Item crownOfForesight = new Item(
-    "Crown of Foresight",
-    "A gold circlet that reveals fragments of the future.",
-    ItemType.KEY,
-    0,
-    false,
-    Arrays.asList("foresight", "sanityDrain")
-);
-
-Item ritualComponents = new Item(
-    "Ritual Components",
-    "Sacred powders and relics needed for elemental rites.",
-    ItemType.QUEST,
-    0,
-    true,
-    Arrays.asList("ritualSuccess", "elementalBinding")
-);
-
-Item desertglassShard = new Item(
-    "Desertglass Shard",
-    "A crystal shard that whispers secrets of the dunes.",
-    ItemType.BOOST,
-    0,
-    false,
-    Arrays.asList("perceptionBoost", "sanityDrain")
-);
-
-Item echoVial = new Item(
-    "Echo Vial",
-    "Stores and replays voices to deceive or inspire.",
-    ItemType.KEY,
-    0,
-    false,
-    Arrays.asList("unlockSoundWard", "deceiveEnemy", "triggerOracleMemory")
-);
