@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arts & Culture | Recognize the Erased</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            brown: '#4A3728',
+                            gold: '#C59D5F',
+                            blue: '#5B7C99',
+                            cream: '#F9F5F0',
+                            dark: '#2C241F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for content readability */
+        .content-section p {
+            margin-bottom: 1.25rem;
+            line-height: 1.75;
+            color: #4B5563; /* Gray-700 */
+        }
+        .content-section h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid theme('colors.brand.gold');
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-dark flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-brand-brown text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="font-serif font-bold text-2xl tracking-wide text-brand-gold hover:text-white transition duration-300">
+                        Recognize<span class="text-white">The</span>Erased
+                    </a>
+                </div>
+
+                <!-- Desktop Menu: "Contributions" is highlighted, since this page is part of that section -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="index.html" class="hover:text-brand-gold transition duration-300">Home</a>
+                    <a href="about.html" class="hover:text-brand-gold transition duration-300">About</a>
+                    <a href="contributions.html" class="text-brand-gold font-bold border-b-2 border-brand-gold pb-1">Contributions</a>
+                    <a href="interactivetimeline.html" class="hover:text-brand-gold transition duration-300">Timeline</a>
+                    <a href="gallery.html" class="hover:text-brand-gold transition duration-300">Gallery</a>
+                    <a href="resources.html" class="hover:text-brand-gold transition duration-300">Resources</a>
+                    <a href="contact.html" class="px-4 py-2 bg-brand-gold text-brand-brown font-bold rounded hover:bg-white hover:text-brand-brown transition duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-gold focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-t border-brand-gold">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                 <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">Home</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">About</a>
+                <a href="contributions.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-gold bg-brand-brown">Contributions</a>
+                <a href="interactivetimeline.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">Timeline</a>
+                <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">Gallery</a>
+                <a href="resources.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">Resources</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-brand-gold hover:bg-brand-brown">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-brand-brown text-white py-12 px-4 shadow-md">
+        <div class="max-w-5xl mx-auto text-center">
+            <h1 class="font-serif text-3xl md:text-5xl font-bold mb-4">Arts & Culture</h1>
+            <div class="h-1 w-24 bg-brand-gold mx-auto mb-6"></div>
+            <p class="text-lg text-gray-200">Creative forces and cultural movements obscured by history.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 content-section">
+
+        <p class="font-serif text-xl text-brand-brown mb-8 text-center">
+            The heart of culture—music, literature, and visual art—has always been shaped by Black and Brown voices, yet the history of credit and recognition is a stark reminder of systemic erasure.
+        </p>
+
+        <!-- Section 1: Artists and Writers -->
+        <section>
+            <h2 class="font-serif text-2xl font-bold text-brand-dark">Individual Artists and Writers</h2>
+
+            <p>Black and Brown creators have made seminal cultural contributions that were often ignored or dismissed. The sculptor <span class="font-bold">Mary Edmonia Lewis (1844–1907)</span>, the daughter of a Black father and Native American mother, was the first professional artist of African-American and Native descent to gain international acclaim [Ref 1].</p>
+
+            <!-- Figure: Edmonia Lewis -->
+            <figure class="my-8 float-right md:w-1/2 lg:w-2/5 md:ml-6 mb-6">
+                <img src="Edmonia Lewis.jpg" alt="Placeholder image of Edmonia Lewis, African American and Native American sculptor." class="w-full h-auto rounded-lg shadow-xl object-cover">
+                <figcaption class="text-center text-sm italic text-gray-600 mt-2">
+                    Figure: Edmonia Lewis (1844–1907), African American and Native American sculptor (ca. 1870). A pioneer whose works celebrated Black liberation.
+                </figcaption>
+            </figure>
+            
+
+            <p>Lewis moved to Rome to escape the pervasive U.S. racism, where she crafted portraits and powerful allegorical works (like her 1867 sculpture <span class="italic">Forever Free</span>) celebrating Black liberation. Yet, after her death, she “died in obscurity” and many of her works were tragically lost [Ref 2]. Lewis herself noted that the U.S. offered “no room for a colored sculptor,” reflecting how systemic racism forced artists like her to the margins.</p>
+
+            <p>Similarly, <span class="font-bold">Zora Neale Hurston (1891–1960)</span>, a novelist and anthropologist of the Harlem Renaissance, documented Black Southern folklore in groundbreaking works. However, her academic peers largely dismissed her ethnography as “unworthy” because she lacked a PhD and studied marginalized communities [Ref 4]. Hurston’s anthropological and literary legacy was “often overlooked” until decades after her death.</p>
+
+            <p><span class="font-bold">Harriet E. Wilson’s</span> 1859 novel <span class="italic">Our Nig</span>—considered the first novel by an African American woman—was published anonymously, sold poorly, and then vanished from public view for over a century. It was only rediscovered in the 1980s by scholar Henry Louis Gates Jr., who noted it had “disappeared for more than 100 years” [Ref 6]. These examples illustrate the systematic erasure and forgetting of Black literary and artistic voices.</p>
+        </section>
+
+        <!-- Section 2: Cultural Movements -->
+        <section class="mt-12">
+            <h2 class="font-serif text-2xl font-bold text-brand-dark">Impact of Cultural Movements</h2>
+            
+            <p>Broader cultural movements likewise suffered erasure, co-option, and under-crediting. The Harlem Renaissance (1910s–30s) and the later Black Arts Movement produced a wealth of music, theater, and visual art, much of which was later appropriated without proper credit in mainstream culture. Iconic genres like <span class="font-bold">Jazz and Blues</span>, born in Black communities, were often adopted by white artists who received wider commercial success and recognition, overshadowing the original Black innovators.</p>
+            
+            <p>Even world-class talents like <span class="font-bold">Bessie Coleman (1892–1926)</span>, the first African-American and Native American female pilot, had to train abroad when U.S. flight schools refused her due to racism.</p>
+
+            <!-- Figure: Bessie Coleman -->
+            <figure class="my-8 float-left md:w-1/2 lg:w-2/5 md:mr-6 mb-6">
+                <img src="Bessie Coleman.JPG" alt="Placeholder image of Bessie Coleman in her aviator gear." class="w-full h-auto rounded-lg shadow-xl object-cover">
+                <figcaption class="text-center text-sm italic text-gray-600 mt-2">
+                    Bessie Coleman (1892–1926), the first African-American and Native American female pilot. Her success was achieved only after facing systemic racial barriers in the US.
+                </figcaption>
+            </figure>
+            
+
+            <p>Coleman later returned to inspire others, becoming a celebrated figure in her community. However, her story reminds us that many American cultural and technical achievements were built despite, rather than because of, the existing societal structure, with pioneers forced to overcome immense discrimination to achieve their place in history. Her accomplishments are a stark reminder of the talent that was nearly lost due to racial prejudice.</p>
+            
+           
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-brown text-white pt-12 pb-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Footer Brand -->
+                <div class="col-span-1 md:col-span-1">
+                    <h4 class="font-serif font-bold text-xl text-brand-gold mb-4">Recognize The Erased</h4>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Reestablishing recognition for Black and Brown innovators whose contributions have been overshadowed by history.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-span-1">
+                    <h5 class="font-bold text-lg mb-4 text-brand-cream">Explore</h5>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="science&medicine.html" class="hover:text-brand-gold transition">Science & Medicine</a></li>
+                        <li><a href="arts&culture.html" class="hover:text-brand-gold transition">Arts & Culture</a></li>
+                        <li><a href="technology.html" class="hover:text-brand-gold transition">Technology</a></li>
+                        <li><a href="socialmovements.html" class="hover:text-brand-gold transition">Social Movements</a></li>
+                    </ul>
+                </div>
+
+                <!-- Project Links -->
+                <div class="col-span-1">
+                    <h5 class="font-bold text-lg mb-4 text-brand-cream">Project</h5>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="about.html" class="hover:text-brand-gold transition">About the Project</a></li>
+                        <li><a href="resources.html" class="hover:text-brand-gold transition">Resources</a></li>
+                        <li><a href="contact.html" class="hover:text-brand-gold transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Search -->
+                <div class="col-span-1">
+                    <h5 class="font-bold text-lg mb-4 text-brand-cream">Search</h5>
+                    <div class="flex">
+                        <input type="text" placeholder="Search history..." class="w-full px-3 py-2 rounded-l bg-brand-dark text-white border-none focus:ring-1 focus:ring-brand-gold">
+                        <button class="bg-brand-gold text-brand-brown px-4 py-2 rounded-r hover:bg-white transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-6 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Ersell Kizzie - Term Project. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
